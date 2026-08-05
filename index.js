@@ -10,10 +10,11 @@ const init = async () => {
 
     await server.route({ //get method
         method: 'GET',
-        path: '/',
+        path: '/health',
         handler: (request, h) => {
             return {
                 status: "OK",
+                timestamp: new Date().toISOString(),
                 message: "cartshare backend is running"
             };
         },
