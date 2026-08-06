@@ -11,8 +11,8 @@ const init = async () => {
     await server.route({ //get method
         method: 'GET',
         path: '/health',
-        handler: (request, h) => {
-            return {
+        handler: (request, h) => { //req is incoming, h is output
+                        return {
                 status: "OK",
                 timestamp: new Date().toISOString(),
                 message: "cartshare backend is running"
@@ -20,8 +20,25 @@ const init = async () => {
         },
     });
 
+    await server.route({
+        method: "POST",
+        path: "/example",
+        handler: (request, reply) => {
 
-    await server.start();
+            // const wtv = request.payload.fieldname
+            //map
+            //service layer i.e. prisma logic
+
+            return reply.response({
+                message: ""
+            }).code(201)
+
+
+        }
+    })
+
+
+    await server.start(); //wakeup hapi.js and get
     console.log('Server running on %s', server.info.uri);
 };
 
