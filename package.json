@@ -19,5 +19,8 @@
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10"
+  },
+  "devDependencies": {
+    "prisma": "^7.9.1"
   }
 }

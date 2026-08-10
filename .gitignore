@@ -1,0 +1,16 @@
+notes.md
+
+# Dependency folders
+node_modules/
+
+# Local AI Agent & Editor configuration folders
+.agents/
+.claude/
+.windsurf/
+skills-lock.json
+
+# Environment variables
+.env
+
+
+/generated/prisma
