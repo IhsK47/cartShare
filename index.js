@@ -1,18 +1,22 @@
 import Hapi from "@hapi/hapi";
 
-import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from '@prisma/client'
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "./generated/prisma/client/index.js";
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
-const prisma = new PrismaClient({ adapter })
-
-
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 
 const init = async () => {
   const server = Hapi.server({
     port: 3000,
     host: "localhost", //probably gonna changed to be www.cartshare.com
   });
+
+  const count = await prisma.Cart.findMany({});
+
+
+  console.log (count)
 
   await server.route({
     //get method
@@ -28,13 +32,14 @@ const init = async () => {
     },
   });
 
-  await server.route({
+  await server.route(
+    {
     //get method
     method: "GET",
     path: "/hello/{name}",
     handler: (request, h) => {
       return {
-        message: "hello," + request.params.name,
+        message: "hello," + request.params.name + count + "well",
       };
     },
   });
@@ -49,17 +54,19 @@ const init = async () => {
 
       return reply
         .response({
-          message: "w",
+          message: "w" + count,
         })
         .code(201);
     },
   });
 
-  await prisma.$connect(); 
+  await prisma.$connect();
   await server.start(); //wakeup hapi.js and get
   console.log("Server running on %s", server.info.uri);
 
-  //prisma.Cart.findMany( {})
+
+
+
 };
 
 process.on("unhandledRejection", (err) => {
