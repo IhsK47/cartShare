@@ -11,29 +11,39 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
 }
 
+
 model Cart {
-  id Int  @id @default(autoincrement())
-  name String
-  joinCode String @unique
-  members Member[]
-  items items[]
+  id        Int     @id @default(autoincrement())
+  name      String
+  joinCode  String  @unique
+  users     UserInCart[]
+  items     Item[]
 }
 
 model User {
-  id Int @default(autoincrement())
-  role Role 
+  id    Int   @id @default(autoincrement())
+  role  Role  
+  carts UserInCart[]
 }
 
 model Item {
-  name string
-  cart Cart
-
+   id  Int       @id @default(autoincrement())
+  name String
+  cartId Int
+  cart Cart  @relation(fields: [cartId], references: [id])
 }
 
+model UserInCart {
+  userId Int    //this is the data in the db, whereas next line is the relation
+  user  User    @relation(fields: [userId], references: [id]) //field has to ref an already existing field, 
+  cartId Int
+  cart  Cart    @relation(fields: [cartId], references: [id])
+
+  @@id([userId, cartId]) // Composite ID
+
+}
 
 
 enum Role {

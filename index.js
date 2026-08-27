@@ -1,10 +1,15 @@
-"use strict";
+import Hapi from "@hapi/hapi";
 
-const Hapi = require("@hapi/hapi");
+import { PrismaPg } from '@prisma/adapter-pg'
+import { PrismaClient } from '@prisma/client'
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+const prisma = new PrismaClient({ adapter })
+
+
 
 const init = async () => {
-  
-    const server = Hapi.server({
+  const server = Hapi.server({
     port: 3000,
     host: "localhost", //probably gonna changed to be www.cartshare.com
   });
@@ -23,18 +28,16 @@ const init = async () => {
     },
   });
 
-    await server.route({
+  await server.route({
     //get method
     method: "GET",
     path: "/hello/{name}",
     handler: (request, h) => {
       return {
-        message: "hello,"+ request.params.name,
+        message: "hello," + request.params.name,
       };
     },
   });
-
-
 
   await server.route({
     method: "POST",
@@ -46,14 +49,17 @@ const init = async () => {
 
       return reply
         .response({
-          message: "",
+          message: "w",
         })
         .code(201);
     },
   });
 
+  await prisma.$connect(); 
   await server.start(); //wakeup hapi.js and get
   console.log("Server running on %s", server.info.uri);
+
+  //prisma.Cart.findMany( {})
 };
 
 process.on("unhandledRejection", (err) => {
