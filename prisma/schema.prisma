@@ -24,6 +24,7 @@ model Cart {
 
 model User {
   id    Int   @id @default(autoincrement())
+  name  String
   role  Role  
   carts UserInCart[]
 }

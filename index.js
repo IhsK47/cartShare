@@ -13,10 +13,10 @@ const init = async () => {
     host: "localhost", //probably gonna changed to be www.cartshare.com
   });
 
-  const count = await prisma.Cart.findMany({});
+  const count = prisma.cart.findMany({});
 
 
-  console.log (count)
+  console.log ("count: ", count)
 
   await server.route({
     //get method
