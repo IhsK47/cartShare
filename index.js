@@ -1,11 +1,7 @@
 import Hapi from "@hapi/hapi";
 
-import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "@prisma/client";
-// import { PrismaClient } from "./generated/prisma/client/index.js";
+import prisma from "./prisma.js";
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
 
 const init = async () => {
   const server = Hapi.server({
@@ -13,8 +9,7 @@ const init = async () => {
     host: "localhost", //probably gonna changed to be www.cartshare.com
   });
 
-  const count = prisma.cart.findMany({});
-
+  const count = await prisma.Cart.findMany();
 
   console.log ("count: ", count)
 
@@ -63,8 +58,6 @@ const init = async () => {
   await prisma.$connect();
   await server.start(); //wakeup hapi.js and get
   console.log("Server running on %s", server.info.uri);
-
-
 
 
 };
