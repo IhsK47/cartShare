@@ -13,9 +13,11 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "index.js",
+  "main": "backend/src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch backend/src --exec node index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",
@@ -25,6 +27,7 @@
     "pg": "^8.23.0"
   },
   "devDependencies": {
+    "nodemon": "^3.1.14",
     "prisma": "^7.9.1"
   }
 }
