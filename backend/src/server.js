@@ -1,6 +1,6 @@
 import Hapi from "@hapi/hapi";
 import prisma from "./config/prisma.js";
-import registerRoutes from "./routes/index.js";
+//import registerRoutes from "./routes/index.js";
 
 const init = async () => {
   const server = Hapi.server({
