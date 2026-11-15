@@ -13,11 +13,12 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "backend/src/server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch backend/src --exec node index.js",
-    "start": "node index.js"
+    "dev": "nodemon --watch src --exec node app.js",
+    "start": "node app.js",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",

@@ -4,10 +4,10 @@ import "dotenv/config";
 import { defineConfig, env } from "prisma/config";
 
 export default defineConfig({
-  schema: "backend/prisma/schema.prisma",
+  schema: "prisma/schema.prisma",
   migrations: {
-    path: "backend/prisma/migrations",
-    seed: 'node backend/prisma/seed.js', //instead of tsx
+    path: "prisma/migrations",
+    seed: 'node prisma/seed.js', //instead of tsx
   },
   datasource: {
     // Passes the pooled/live URL to Prisma Client

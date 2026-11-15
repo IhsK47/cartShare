@@ -4,18 +4,19 @@ CartShare is a shared shopping-list app for households, offices, and events.
 
 ## Project layout
 
+- `backend/app.js` is the backend entry point.
 - `backend/src/server.js` starts the Hapi API.
-- `backend/src/routes/` maps HTTP endpoints to handlers.
-- `backend/src/handlers.js` contains request handling and the current prototype logic.
+- `backend/src/routes/` is where route registration will live.
+- `backend/src/handlers.js` is reserved for request handling.
 - `backend/src/config/prisma.js` creates the Prisma/PostgreSQL client.
 - `backend/prisma/` contains the database schema and migrations.
 - `frontend/` is reserved for the React app; `frontend/public/` currently contains a placeholder HTML page.
 
-The root `index.js` is kept as a convenient entry point. The package configuration and local dependencies remain at the repository root until a frontend app is added.
+Backend package configuration, dependencies, and environment files live in `backend/`. Frontend files remain separate in `frontend/`.
 
 ## Running the backend
 
-Create a root `.env` file with `DATABASE_URL` and `DIRECT_URL`, then run:
+Create `backend/.env` with `DATABASE_URL` and `DIRECT_URL`, then run these commands from `backend/`:
 
 ```sh
 npm start

@@ -1,1 +1,8 @@
-// Reserved for request handlers when the API is split into separate files.
+export const getHealth = () => {
+  return {
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    message: "cartshare backend is running",
+  };
+}
+
